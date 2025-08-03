@@ -1,0 +1,108 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.header {
+    margin: 0;
+    padding: 0;
+    /* background-color: rgb(117, 161, 12); */
+    background-color: #343a40;
+    height: 60px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    z-index: 999;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+
+}
+
+.logoName {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 20px;
+    margin-left: -5px;
+}
+
+.logoName:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.nav-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.navLink {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: transform 0.1s ease, filter 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    opacity: 0.85;
+}
+
+.navLink:hover {
+    transform: scale(1.05);
+    opacity: 1;
+    text-decoration: none;
+    color: white;
+}
+
+
+.left-section,
+.right-section,
+.center-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.left-section {
+    gap: 20px;
+}
+
+.right-section {
+    gap: 15px;
+}
+
+
+.language-switcher {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.flag {
+
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: border-color 0.3s;
+    object-fit: cover;
+}
+
+.navLink:hover .heart-icon {
+    color: #ff0000;
+    text-decoration: none;
+}
