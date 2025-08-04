@@ -2,23 +2,48 @@ import './Header.css';
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaHeart, FaShoppingCart, FaUser } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+function Header({ currentUser, setCurrentUser }) {
+    const [showLogout, setShowLogout] = useState(false);
+    const navigate = useNavigate();
 
-function Header() {
+    const handleLogout = () => {
+        localStorage.removeItem("currentUser");
+        setCurrentUser(null);
+        navigate('/');
+    };
+    const toggleLogout = () => {
+        setShowLogout(!showLogout);
+    };
     return (
         <header className="header fixed-top">
             <nav className='nav-container'>
 
                 <div className='left-section'>
                     <img className='logo' src="/images/tech-img.jpeg" />
-                    <Link to="/" className='logoName'>TECH STORE</Link>
+                    <Link className='logoName' to="/" >JUST STORE</Link>
                     <Link className='navLink' to="/">Home</Link>
-                    <Link className='navLink' to="/">About</Link>
-                    <Link className='navLink' to="/">Contact</Link>
+                    <Link className='navLink' to="/about">About</Link>
+                    <Link className='navLink' to="/contact">Contact</Link>
                 </div>
 
                 <div className='right-section'>
-                    <Link className='navLink' to="/login"><FaUser /> Login</Link>
+                    {currentUser ? (
+                        <div className="user-info" style={{ position: 'relative' }}>
+                            <span className='navLink' onClick={toggleLogout}>
+                                <FaUser /> {currentUser.name}
+                            </span>
+                            {showLogout && (
+                                <button className="logout-button" onClick={handleLogout}>
+                                    Log out
+                                </button>
+                            )}
+                        </div>
+                    ) : (
+                        <Link className='navLink' to="/login"><FaUser /> Login</Link>
+                    )}
                     <Link className='navLink' to="/favorites"><FaHeart className='heart-icon' />Favorites</Link>
                     <Link className='navLink' to="/basket"><FaShoppingCart />Basket</Link>
 

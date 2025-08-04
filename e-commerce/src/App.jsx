@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import Header from './Components/Header'
 import { Route, Routes } from 'react-router-dom'
@@ -12,17 +12,23 @@ import { BasketProvider } from './Context/BasketContext';
 import { FavoriteProvider } from "./Context/FavoriteContext.jsx";
 
 function App() {
+  //kullanici login icin
+  const [currentUser, setCurrentUser] = useState(null);
 
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (storedUser) setCurrentUser(storedUser);
+  }, []);
 
   return (
 
     <ProductProvider>
       <BasketProvider>
         <FavoriteProvider>
-          <Header />
+          <Header currentUser={currentUser} setCurrentUser={setCurrentUser} />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/basket" element={<Basket />} />
             <Route path="*" element={<NotFound />} />

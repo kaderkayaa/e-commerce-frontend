@@ -51,7 +51,7 @@ const Home = () => {
             <div className="row">
                 {/* anasayfadaki filtreleme kismi burada*/}
                 <div className="col-2 filter-container">
-                    <h5 style={{ color: "#ffff", textAlign: "center" }}>Filter</h5>
+                    <h5 style={{ color: "black", textAlign: "center" }}>Filter</h5>
                     <div className="mb-3">
                         <input
                             type="text"
@@ -103,7 +103,7 @@ const Home = () => {
                             <div key={product.id} className="product-card">
                                 <FaHeart
                                     className="favorite-icon"
-                                    color={isFavorite(product.id) ? "#ff0000" : "white"}
+                                    color={isFavorite(product.id) ? "#ff0000" : "#c6c6c6ff"}
                                     onClick={() => {
                                         toggleFavorite(product);
 

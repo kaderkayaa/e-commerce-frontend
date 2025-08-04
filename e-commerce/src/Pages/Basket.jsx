@@ -4,7 +4,7 @@ import "./basket.css";
 import Checkbox from "@mui/material/Checkbox";
 
 const Basket = () => {
-    const { basket, increaseQuantity, decreaseQuantity, clearBasket } = useContext(BasketContext);
+    const { basket, increaseQuantity, decreaseQuantity, clearBasket, removeFromBasket } = useContext(BasketContext);
 
     const [selectedItems, setSelectedItems] = useState(() => {
         const savedSelections = localStorage.getItem("selectedItems");
@@ -64,6 +64,10 @@ const Basket = () => {
                                 </div>
 
                                 <span className="basket-item-price">{item.price} $</span>
+
+                                <button className="basket-delete-btn" onClick={() => removeFromBasket(item.id)}>
+                                    Delete
+                                </button>
                             </li>
                         ))}
                     </ul>

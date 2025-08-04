@@ -1,6 +1,6 @@
 .basket-title {
     display: inline-block;
-    background-color: #f5f5f549;
+    background-color: #544f4f44;
     padding: 15px 30px;
     margin: 60px auto;
     border-radius: 10px;
@@ -14,12 +14,12 @@
 
 .no-basket {
     display: inline-block;
-    background-color: #f5f5f549;
+    background-color: #544f4f44;
     padding: 12px 24px;
     margin: 150px auto;
     border-radius: 10px;
     font-size: 18px;
-    color: #ffffff;
+    color: #ffff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     position: absolute;
     margin-top: 280px;
@@ -40,6 +40,7 @@
 }
 
 .basket-item {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -60,6 +61,7 @@
 }
 
 .basket-item-title {
+    width: 90px;
     flex-grow: 1;
     font-weight: 600;
     font-size: 16px;
@@ -68,6 +70,7 @@
 }
 
 .basket-item-price {
+    width: 60px;
     font-weight: 700;
     font-size: 16px;
     color: black;
@@ -98,7 +101,7 @@
 
 .basket-total {
     display: inline-block;
-    background-color: #f5f5f549;
+    background-color: #544f4f44;
     padding: 12px 24px;
     margin: 60px auto;
     border-radius: 10px;
@@ -134,7 +137,7 @@
 
 .basket-clear {
     display: inline-block;
-    background-color: #f5f5f549;
+    background-color: #544f4f44;
     padding: 12px 24px;
     margin: 60px auto;
     border-radius: 10px;
@@ -142,5 +145,26 @@
     color: #ffffff;
     position: relative;
     border: none;
+    transition: transform 0.2s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.basket-clear:hover {
+    transform: scale(1.2);
+}
+
+.basket-delete-btn {
+    background-color: #d31e1ea4;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    margin-left: 10px;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.basket-delete-btn:hover {
+    transform: scale(1.2);
 }

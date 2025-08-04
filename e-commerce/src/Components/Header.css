@@ -7,7 +7,7 @@ body {
     margin: 0;
     padding: 0;
     /* background-color: rgb(117, 161, 12); */
-    background-color: #343a40;
+    background-color: #730808;
     height: 60px;
     width: 100%;
     position: fixed;
@@ -105,4 +105,33 @@ body {
 .navLink:hover .heart-icon {
     color: #ff0000;
     text-decoration: none;
+}
+
+.user-info {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.logout-button {
+    height: 40px;
+    width: 120px;
+    position: absolute;
+    top: 100%;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-top: 33px;
+    margin-left: 30px;
+    display: inline-block;
+    background-color: #544f4f44;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translate(-50%, -50%);
+}
+
+.logout-button:hover {
+    background-color: rgb(149, 24, 24);
 }

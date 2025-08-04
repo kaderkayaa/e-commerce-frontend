@@ -36,7 +36,7 @@ const Favorites = () => {
                             className="add-button"
                             onClick={() => addToBasket(product)}
                         >
-                            Sepete Ekle
+                            Add To Card
                         </button>
                     </div>
                 ))}

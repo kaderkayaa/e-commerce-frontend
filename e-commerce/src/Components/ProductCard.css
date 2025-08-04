@@ -8,10 +8,10 @@
     box-sizing: border-box;
 
     /*flu kismini buraya ekledim*/
-    background: rgba(255, 255, 255, 0.185);
+    background: rgba(255, 255, 255, 0.642);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    color: white;
+    color: rgb(0, 0, 0);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -62,10 +62,9 @@
     left: 165px;
     width: 300px;
     padding: 20px;
-    border: 2px solid black;
     border-radius: 10px;
-    box-shadow: 0 0 10px black;
-    background-color: #343a40;
+    box-shadow: 0 0 10px rgb(134, 130, 130);
+    background-color: #ffffff9c;
     height: fit-content;
     z-index: 1000;
 }
@@ -77,12 +76,13 @@
 }
 
 .button-reset {
-    background-color: white;
+    background-color: #544f4f27;
     color: #343a40;
     padding: 8px 20px;
     border: none;
     border-radius: 6px;
     font-size: 16px;
+
 }
 
 .add-button {
@@ -97,12 +97,14 @@
 }
 
 .add-button:hover {
-    background-color: #20b144;
+    background-color: #730808;
+    color: #ffff;
 }
 
 
 
 .favorite-icon {
+    color: #5a5757;
     position: absolute;
     top: 8px;
     right: 8px;
