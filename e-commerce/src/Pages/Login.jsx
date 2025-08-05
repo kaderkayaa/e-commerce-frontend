@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Login.css'; // İsteğe bağlı stil
+import './Login.css';
+import { toast } from 'react-toastify';
+
 
 function Login({ setCurrentUser }) {
     const [isRegistering, setIsRegistering] = useState(true);
@@ -13,7 +15,7 @@ function Login({ setCurrentUser }) {
         e.preventDefault();
         const userData = { name, email, password };
         localStorage.setItem('user', JSON.stringify(userData));
-        alert("Kayıt başarılı! Giriş yapabilirsiniz.");
+        toast.success("Registration successful! You can log in.")
         setIsRegistering(false);
         setName('');
         setPassword('');
@@ -22,14 +24,15 @@ function Login({ setCurrentUser }) {
     const handleLogin = (e) => {
         e.preventDefault();
         const storedUser = JSON.parse(localStorage.getItem('user'));
-        if (!storedUser) return alert("Kayıt bulunamadı.");
+        if (!storedUser) return toast.error("User not found!");
 
         if (storedUser.email === email && storedUser.password === password) {
             localStorage.setItem("currentUser", JSON.stringify(storedUser));
             setCurrentUser(storedUser);
             navigate('/');
+            toast.success("Login successful.");
         } else {
-            alert("Email veya şifre hatalı.");
+            toast.error("Email or password is incorrect!");
         }
     };
 

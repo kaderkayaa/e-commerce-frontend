@@ -5,6 +5,7 @@ import { BasketContext } from "../Context/BasketContext";
 import { FavoriteContext } from "../Context/FavoriteContext";
 import { FaHeart } from "react-icons/fa";
 import "../Components/ProductCard.css";
+import { toast } from "react-toastify";
 
 
 const Home = () => {
@@ -19,6 +20,7 @@ const Home = () => {
 
     const navigate = useNavigate();
 
+    const [addedMessage, setAddedMessage] = useState(false);
 
     useEffect(() => {
         let filtered = product;
@@ -106,13 +108,22 @@ const Home = () => {
                                     color={isFavorite(product.id) ? "#ff0000" : "#c6c6c6ff"}
                                     onClick={() => {
                                         toggleFavorite(product);
-
+                                        const isFav = favorites.some(item => item.id === product.id);
+                                        if (isFav) {
+                                            toast.error("Removed from favorites.");
+                                        } else {
+                                            toast.success("Added to favorites.");
+                                        }
                                     }}
                                 />
                                 <img src={product.image} alt={product.title} />
                                 <h4>{product.title}</h4>
                                 <p className="price-p">{product.price} $</p>
-                                <button className="add-button" onClick={() => addToBasket(product)}>
+                                <button className="add-button"
+                                    onClick={() => {
+                                        addToBasket(product);
+                                        toast.success("Product added to basket.");
+                                    }}>
                                     Add To Card
                                 </button>
                             </div>

@@ -8,3 +8,16 @@ body {
     padding: 0;
     font-family: sans-serif;
 }
+
+.footer {
+    background-color: #4f4a5083;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.toast-container {
+    margin-top: 43px;
+}

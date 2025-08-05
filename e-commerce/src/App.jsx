@@ -10,6 +10,9 @@ import NotFound from './pages/NotFound';
 import { ProductProvider } from "./Context/ProductContext";
 import { BasketProvider } from './Context/BasketContext';
 import { FavoriteProvider } from "./Context/FavoriteContext.jsx";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   //kullanici login icin
@@ -33,6 +36,7 @@ function App() {
             <Route path="/basket" element={<Basket />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <ToastContainer position="top-right" autoClose={3000} className="toast-container" />
         </FavoriteProvider>
       </BasketProvider>
     </ProductProvider>

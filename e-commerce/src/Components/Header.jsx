@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { FaHeart, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Header({ currentUser, setCurrentUser }) {
     const [showLogout, setShowLogout] = useState(false);
@@ -12,6 +13,7 @@ function Header({ currentUser, setCurrentUser }) {
     const handleLogout = () => {
         localStorage.removeItem("currentUser");
         setCurrentUser(null);
+        toast.info("Successfully logged out!");
         navigate('/');
     };
     const toggleLogout = () => {
@@ -36,7 +38,8 @@ function Header({ currentUser, setCurrentUser }) {
                                 <FaUser /> {currentUser.name}
                             </span>
                             {showLogout && (
-                                <button className="logout-button" onClick={handleLogout}>
+                                <button className="logout-button" onClick={handleLogout} >
+
                                     Log out
                                 </button>
                             )}
@@ -47,7 +50,7 @@ function Header({ currentUser, setCurrentUser }) {
                     <Link className='navLink' to="/favorites"><FaHeart className='heart-icon' />Favorites</Link>
                     <Link className='navLink' to="/basket"><FaShoppingCart />Basket</Link>
 
-                    {/* Dil değiştirme bayrakları */}
+
                     <div className="language-switcher">
                         <img src="/images/us-flag.png" alt="English" title="English" className="flag" />
                         <img src="/images/tr-flag.png" alt="Turkish" title="Türkçe" className="flag" />

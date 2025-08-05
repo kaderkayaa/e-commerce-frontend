@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { BasketContext } from "../Context/BasketContext";
 import "./basket.css";
 import Checkbox from "@mui/material/Checkbox";
+import { toast } from "react-toastify";
 
 const Basket = () => {
     const { basket, increaseQuantity, decreaseQuantity, clearBasket, removeFromBasket } = useContext(BasketContext);
@@ -65,7 +66,11 @@ const Basket = () => {
 
                                 <span className="basket-item-price">{item.price} $</span>
 
-                                <button className="basket-delete-btn" onClick={() => removeFromBasket(item.id)}>
+                                <button className="basket-delete-btn"
+                                    onClick={() => {
+                                        removeFromBasket(item.id);
+                                        toast.error("Product removed from basket.")
+                                    }}>
                                     Delete
                                 </button>
                             </li>
@@ -76,7 +81,10 @@ const Basket = () => {
                         <strong>Total : </strong> {calculateTotal()} $
                     </div>
 
-                    <button className="basket-clear" onClick={clearBasket}>
+                    <button className="basket-clear" onClick={() => {
+                        clearBasket();
+                        toast.error("Basket cleared.");
+                    }}>
                         Clear All
                     </button>
                 </>
