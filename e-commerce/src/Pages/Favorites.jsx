@@ -6,7 +6,7 @@ import "./favorites.css";
 import { toast } from 'react-toastify';
 
 const Favorites = () => {
-    const { favorites, toggleFavorite } = useContext(FavoriteContext);
+    const { favorites, toggleFavorite, clearFavorites } = useContext(FavoriteContext);
     const { addToBasket } = useContext(BasketContext);
 
     const handleAddToBasket = (product) => {
@@ -17,6 +17,11 @@ const Favorites = () => {
     const handleToggleFavorite = (product) => {
         toggleFavorite(product);
         toast.error("Removed from favorites.");
+    };
+
+    const handleClearAll = () => {
+        clearFavorites();
+        toast.success("All favorites cleared.");
     };
 
 
@@ -53,6 +58,11 @@ const Favorites = () => {
                         </button>
                     </div>
                 ))}
+            </div>
+            <div style={{ textAlign: "center", margin: "20px 0" }}>
+                <button className="clear-all-btn" onClick={handleClearAll}>
+                    Clear All
+                </button>
             </div>
         </div>
     );

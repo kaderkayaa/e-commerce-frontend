@@ -3,6 +3,8 @@ import { BasketContext } from "../Context/BasketContext";
 import "./basket.css";
 import Checkbox from "@mui/material/Checkbox";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import { FaTrash } from 'react-icons/fa';
 
 const Basket = () => {
     const { basket, increaseQuantity, decreaseQuantity, clearBasket, removeFromBasket } = useContext(BasketContext);
@@ -71,7 +73,7 @@ const Basket = () => {
                                         removeFromBasket(item.id);
                                         toast.error("Product removed from basket.")
                                     }}>
-                                    Delete
+                                    <FaTrash size={18} />
                                 </button>
                             </li>
                         ))}
@@ -81,12 +83,23 @@ const Basket = () => {
                         <strong>Total : </strong> {calculateTotal()} $
                     </div>
 
-                    <button className="basket-clear" onClick={() => {
-                        clearBasket();
-                        toast.error("Basket cleared.");
-                    }}>
-                        Clear All
-                    </button>
+                    <div className="button-div">
+                        <button className="basket-clear" onClick={() => {
+                            clearBasket();
+                            toast.error("Basket cleared.");
+                        }}>
+                            Clear All
+                        </button>
+
+                        <Link to="/" className="continue-shopping-btn">
+                            Continue Shopping
+                        </Link>
+
+                        <button className="checkout-btn" onClick={() => {
+                        }}>
+                            Pay
+                        </button>
+                    </div>
                 </>
             )}
         </div>

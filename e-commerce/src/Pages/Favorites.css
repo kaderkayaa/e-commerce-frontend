@@ -76,3 +76,21 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.clear-all-btn {
+    display: inline-block;
+    background-color: #544f4f44;
+    padding: 12px 24px;
+    margin: 60px auto;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #ffffff;
+    position: relative;
+    border: none;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.clear-all-btn:hover {
+    transform: scale(1.2);
+}
