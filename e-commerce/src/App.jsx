@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import './i18n';
 import Header from './Components/Header'
 import { Route, Routes } from 'react-router-dom'
 import Home from './Pages/Home';
@@ -28,16 +29,20 @@ function App() {
     <ProductProvider>
       <BasketProvider>
         <FavoriteProvider>
-          <Header currentUser={currentUser} setCurrentUser={setCurrentUser} />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />} />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/basket" element={<Basket />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Footer />
-          <ToastContainer position="top-right" autoClose={3000} className="toast-container" />
+          <div className="app-wrapper" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+            <Header currentUser={currentUser} setCurrentUser={setCurrentUser} />
+            <div className="app-content" style={{ flex: 1 }}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />} />
+                <Route path="/favorites" element={<Favorites />} />
+                <Route path="/basket" element={<Basket />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
+            <Footer />
+            <ToastContainer position="top-right" autoClose={3000} className="toast-container" />
+          </div>
         </FavoriteProvider>
       </BasketProvider>
     </ProductProvider>

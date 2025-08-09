@@ -6,12 +6,15 @@ import { FavoriteContext } from "../Context/FavoriteContext";
 import { FaHeart } from "react-icons/fa";
 import "../Components/ProductCard.css";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 
 const Home = () => {
     const { product, loading } = useContext(ProductContext);
     const { addToBasket } = useContext(BasketContext);
     const { favorites, toggleFavorite } = useContext(FavoriteContext);
+
+    const { t, i18n } = useTranslation();
 
     const [searchText, setSearchText] = useState("");
     const [minPrice, setMinPrice] = useState("");
@@ -20,7 +23,6 @@ const Home = () => {
 
     const navigate = useNavigate();
 
-    const [addedMessage, setAddedMessage] = useState(false);
 
     useEffect(() => {
         let filtered = product;
@@ -42,7 +44,7 @@ const Home = () => {
     }, [searchText, minPrice, maxPrice, product]);
 
     if (loading) {
-        return <p style={{ textAlign: "center" }}>Ürünler yükleniyor...</p>;
+        return <p style={{ textAlign: "center" }}>{t("loadingProducts")}</p>;
     }
 
 
@@ -53,14 +55,14 @@ const Home = () => {
             <div className="row">
                 {/* anasayfadaki filtreleme kismi burada*/}
                 <div className="col-2 filter-container">
-                    <h5 style={{ color: "black", textAlign: "center" }}>Filter</h5>
+                    <h5 style={{ color: "black", textAlign: "center" }}>{t("filter")}</h5>
                     <div className="mb-3">
                         <input
                             type="text"
                             className="form-control"
                             value={searchText}
                             onChange={(e) => setSearchText(e.target.value)}
-                            placeholder="Search"
+                            placeholder={t("search")}
                         />
                     </div>
                     <div className="mb-3">
@@ -91,7 +93,7 @@ const Home = () => {
                                 setMinPrice("");
                                 setMaxPrice("");
                             }}>
-                            Reset
+                            {t("reset")}
                         </button>
                     </div>
 
@@ -110,26 +112,29 @@ const Home = () => {
                                         toggleFavorite(product);
                                         const isFav = favorites.some(item => item.id === product.id);
                                         if (isFav) {
-                                            toast.error("Removed from favorites.");
+                                            toast.error(t("removedFromFavorites"));
                                         } else {
-                                            toast.success("Added to favorites.");
+                                            toast.success(t("addedToFavorites"));
                                         }
                                     }}
                                 />
                                 <img src={product.image} alt={product.title} />
                                 <h4>{product.title}</h4>
-                                <p className="price-p">{product.price} $</p>
+                                <p className="price-p">
+                                    {i18n.language === 'tr' ? (product.price * 40).toFixed(2) : product.price} {i18n.language === 'tr' ? '₺' : '$'}
+                                </p>
                                 <button className="add-button"
                                     onClick={() => {
                                         addToBasket(product);
-                                        toast.success("Product added to basket.");
+                                        toast.success(t("productAddedToBasket"));
                                     }}>
-                                    Add To Card
+                                    {t("addToCart")}
                                 </button>
                             </div>
                         ))
                     ) : (
-                        <p>No product suitable for the filter was found.</p>
+                        // <p>No product suitable for the filter was found.</p>
+                        <p>{t("noProductFound")}</p>
                     )}
                 </div>
             </div>

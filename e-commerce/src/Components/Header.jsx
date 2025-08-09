@@ -1,24 +1,32 @@
 import './Header.css';
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaHeart, FaShoppingCart, FaUser } from 'react-icons/fa';
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
+
+
 
 function Header({ currentUser, setCurrentUser }) {
     const [showLogout, setShowLogout] = useState(false);
     const navigate = useNavigate();
+    const { t, i18n } = useTranslation();
 
     const handleLogout = () => {
         localStorage.removeItem("currentUser");
         setCurrentUser(null);
-        toast.info("Successfully logged out!");
+        toast.info(t("logoutBtn"));
         navigate('/');
     };
     const toggleLogout = () => {
         setShowLogout(!showLogout);
     };
+
+    const changeLanguage = (lng) => {
+        i18n.changeLanguage(lng);
+        localStorage.setItem('i18nextLng', lng);
+    };
+
     return (
         <header className="header fixed-top">
             <nav className='nav-container'>
@@ -26,9 +34,9 @@ function Header({ currentUser, setCurrentUser }) {
                 <div className='left-section'>
                     <img className='logo' src="/images/tech-img.jpeg" />
                     <Link className='logoName' to="/" >JUST STORE</Link>
-                    <Link className='navLink' to="/">Home</Link>
-                    <Link className='navLink' to="/about">About</Link>
-                    <Link className='navLink' to="/contact">Contact</Link>
+                    <Link className='navLink' to="/">{t("home")}</Link>
+                    <Link className='navLink' to="/about">{t("about")}</Link>
+                    <Link className='navLink' to="/contact">{t("contact")}</Link>
                 </div>
 
                 <div className='right-section'>
@@ -39,21 +47,34 @@ function Header({ currentUser, setCurrentUser }) {
                             </span>
                             {showLogout && (
                                 <button className="logout-button" onClick={handleLogout} >
-
-                                    Log out
+                                    {t("logout")}
                                 </button>
                             )}
                         </div>
                     ) : (
-                        <Link className='navLink' to="/login"><FaUser /> Login</Link>
+                        <Link className='navLink' to="/login"><FaUser /> {t("login")}</Link>
                     )}
-                    <Link className='navLink' to="/favorites"><FaHeart className='heart-icon' />Favorites</Link>
-                    <Link className='navLink' to="/basket"><FaShoppingCart />Basket</Link>
+                    <Link className='navLink' to="/favorites"><FaHeart className='heart-icon' />{t("favorites")}</Link>
+                    <Link className='navLink' to="/basket"><FaShoppingCart />{t("basket")}</Link>
 
 
                     <div className="language-switcher">
-                        <img src="/images/us-flag.png" alt="English" title="English" className="flag" />
-                        <img src="/images/tr-flag.png" alt="Turkish" title="Türkçe" className="flag" />
+                        <img
+                            src="/images/us-flag.png"
+                            alt="English"
+                            title="English"
+                            className="flag"
+                            onClick={() => changeLanguage("en")}
+                            style={{ cursor: "pointer" }}
+                        />
+                        <img
+                            src="/images/tr-flag.png"
+                            alt="Turkish"
+                            title="Türkçe"
+                            className="flag"
+                            onClick={() => changeLanguage("tr")}
+                            style={{ cursor: "pointer" }}
+                        />
                     </div>
                 </div>
             </nav>

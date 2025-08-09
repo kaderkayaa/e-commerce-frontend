@@ -4,38 +4,40 @@ import { BasketContext } from "../Context/BasketContext";
 import { FaHeart } from "react-icons/fa";
 import "./favorites.css";
 import { toast } from 'react-toastify';
+import { useTranslation } from "react-i18next";
 
 const Favorites = () => {
     const { favorites, toggleFavorite, clearFavorites } = useContext(FavoriteContext);
     const { addToBasket } = useContext(BasketContext);
+    const { t } = useTranslation();
 
     const handleAddToBasket = (product) => {
         addToBasket(product);
-        toast.success("Product added to basket.");
+        toast.success(t("productAddedToBasket"));
     };
 
     const handleToggleFavorite = (product) => {
         toggleFavorite(product);
-        toast.error("Removed from favorites.");
+        toast.error(t("removedFromFavorites"));
     };
 
     const handleClearAll = () => {
         clearFavorites();
-        toast.success("All favorites cleared.");
+        toast.success(t("allFavoritesCleared"));
     };
 
 
     if (favorites.length === 0) {
         return (
             <div style={{ textAlign: "center", marginTop: "150px" }}>
-                <p className="no-favori">Your favorites is empty.</p>
+                <p className="no-favori">{t("favoritesEmpty")}.</p>
             </div>
         );
     }
 
     return (
         <div>
-            <div className="favorites-title">Your Favorites</div>
+            <div className="favorites-title">{t("yourFavorites")}</div>
             <div className="favorites-container">
                 {favorites.map((product) => (
                     <div key={product.id} className="favorite-product-card">
@@ -54,14 +56,14 @@ const Favorites = () => {
                             className="add-button"
                             onClick={() => handleAddToBasket(product)}
                         >
-                            Add To Card
+                            {t("addToCart")}
                         </button>
                     </div>
                 ))}
             </div>
             <div style={{ textAlign: "center", margin: "20px 0" }}>
                 <button className="clear-all-btn" onClick={handleClearAll}>
-                    Clear All
+                    {t("clearAll")}
                 </button>
             </div>
         </div>

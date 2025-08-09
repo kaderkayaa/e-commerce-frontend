@@ -5,9 +5,11 @@ import Checkbox from "@mui/material/Checkbox";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { FaTrash } from 'react-icons/fa';
+import { useTranslation } from "react-i18next";
 
 const Basket = () => {
     const { basket, increaseQuantity, decreaseQuantity, clearBasket, removeFromBasket } = useContext(BasketContext);
+    const { t } = useTranslation();
 
     const [selectedItems, setSelectedItems] = useState(() => {
         const savedSelections = localStorage.getItem("selectedItems");
@@ -38,10 +40,10 @@ const Basket = () => {
         <div className="container mt-5">
 
             {basket.length === 0 ? (
-                <p className="no-basket">Your cart is empty.</p>
+                <p className="no-basket">{t("emptyCart")}</p>
             ) : (
                 <>
-                    <h2 className="basket-title">Your Basket</h2>
+                    <h2 className="basket-title">{t("yourBasket")}</h2>
                     <ul className="basket-list">
                         {basket.map((item, index) => (
                             <li key={index} className="basket-item">
@@ -71,7 +73,7 @@ const Basket = () => {
                                 <button className="basket-delete-btn"
                                     onClick={() => {
                                         removeFromBasket(item.id);
-                                        toast.error("Product removed from basket.")
+                                        toast.error(t("productRemoved"))
                                     }}>
                                     <FaTrash size={18} />
                                 </button>
@@ -80,24 +82,24 @@ const Basket = () => {
                     </ul>
 
                     <div className="basket-total">
-                        <strong>Total : </strong> {calculateTotal()} $
+                        <strong>{t("total")} : </strong> {calculateTotal()} $
                     </div>
 
                     <div className="button-div">
                         <button className="basket-clear" onClick={() => {
                             clearBasket();
-                            toast.error("Basket cleared.");
+                            toast.error(t("basketCleared"));
                         }}>
-                            Clear All
+                            {t("clearAll")}
                         </button>
 
                         <Link to="/" className="continue-shopping-btn">
-                            Continue Shopping
+                            {t("continueShopping")}
                         </Link>
 
                         <button className="checkout-btn" onClick={() => {
                         }}>
-                            Pay
+                            {t("pay")}
                         </button>
                     </div>
                 </>

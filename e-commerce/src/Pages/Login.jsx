@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 
 function Login({ setCurrentUser }) {
+    const { t } = useTranslation();
+
     const [isRegistering, setIsRegistering] = useState(true);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -15,7 +18,7 @@ function Login({ setCurrentUser }) {
         e.preventDefault();
         const userData = { name, email, password };
         localStorage.setItem('user', JSON.stringify(userData));
-        toast.success("Registration successful! You can log in.")
+        toast.success(t("registrationSuccess"));
         setIsRegistering(false);
         setName('');
         setPassword('');
@@ -24,15 +27,15 @@ function Login({ setCurrentUser }) {
     const handleLogin = (e) => {
         e.preventDefault();
         const storedUser = JSON.parse(localStorage.getItem('user'));
-        if (!storedUser) return toast.error("User not found!");
+        if (!storedUser) return toast.error(t("userNotFound"));
 
         if (storedUser.email === email && storedUser.password === password) {
             localStorage.setItem("currentUser", JSON.stringify(storedUser));
             setCurrentUser(storedUser);
             navigate('/');
-            toast.success("Login successful.");
+            toast.success(t("loginSuccess"));
         } else {
-            toast.error("Email or password is incorrect!");
+            toast.error(t("emailOrPasswordIncorrect"));
         }
     };
 
@@ -40,20 +43,20 @@ function Login({ setCurrentUser }) {
         <div className="login-container">
             {isRegistering ? (
                 <form onSubmit={handleRegister}>
-                    <h2 style={{ textAlign: 'center' }}>Sign Up</h2>
-                    <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required />
-                    <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                    <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                    <button type="submit">Sign Up</button>
-                    <p>Do you already have an account? <span onClick={() => setIsRegistering(false)} style={{ color: 'blue', cursor: 'pointer' }}>Sign In</span></p>
+                    <h2 style={{ textAlign: 'center' }}>{t("signUp")}</h2>
+                    <input type="text" placeholder={t("name")} value={name} onChange={(e) => setName(e.target.value)} required />
+                    <input type="email" placeholder={t("email")} value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <input type="password" placeholder={t("password")} value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <button type="submit">{t("signUp")}</button>
+                    <p>{t("alreadyHaveAccount")}<span onClick={() => setIsRegistering(false)} style={{ color: 'blue', cursor: 'pointer' }}>{t("signIn")}</span></p>
                 </form>
             ) : (
                 <form onSubmit={handleLogin}>
-                    <h2 style={{ textAlign: 'center' }}>Sign In</h2>
-                    <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                    <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                    <button type="submit">Sign In</button>
-                    <p>Don't you have an account? <span onClick={() => setIsRegistering(true)} style={{ color: 'blue', cursor: 'pointer' }}>Sign Up</span></p>
+                    <h2 style={{ textAlign: 'center' }}>{t("signIn")}</h2>
+                    <input type="email" placeholder={t("email")} value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <input type="password" placeholder={t("password")} value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <button type="submit">{t("signIn")}</button>
+                    <p>{t("dontHaveAccount")} <span onClick={() => setIsRegistering(true)} style={{ color: 'blue', cursor: 'pointer' }}>{t("signUp")}</span></p>
                 </form>
             )
             }
