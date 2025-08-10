@@ -4,9 +4,9 @@ import './i18n';
 import Header from './Components/Header'
 import { Route, Routes } from 'react-router-dom'
 import Home from './Pages/Home';
-import Login from './Pages/Login';
-import Favorites from './Pages/Favorites';
-import Basket from './Pages/Basket';
+import Login from './Pages/Login/Login.jsx';
+import Favorites from './Pages/Favorite/Favorites.jsx';
+import Basket from './Pages/Basket/Basket.jsx';
 import NotFound from './pages/NotFound';
 import { ProductProvider } from "./Context/ProductContext";
 import { BasketProvider } from './Context/BasketContext';

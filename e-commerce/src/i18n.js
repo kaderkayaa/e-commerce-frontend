@@ -46,7 +46,21 @@ const resources = {
             emailOrPasswordIncorrect: "Email or password is incorrect!",
             alreadyHaveAccount: "Do you already have an account?",
             dontHaveAccount: "Don't you have an account?",
-            logoutBtn: "Exited."
+            logoutBtn: "Exited.",
+            orderReceived: "Order Received",
+            backToHome: "BACK TO HOME",
+            payment: "Payment",
+            cardNumber: "Card Number",
+            expiryDate: "Expiry Date",
+            back: "Back",
+            next: "Next",
+            pleaseFillPaymentInfo: "Please Fill Payment Info",
+            deliveryAddress: "Delivery Address",
+            fullName: "Full Name",
+            address: "Address",
+            phone: "Phone",
+            confirmation: "Confirmation"
+
         }
     },
     tr: {
@@ -93,7 +107,20 @@ const resources = {
             emailOrPasswordIncorrect: "E-posta veya şifre yanlış!",
             alreadyHaveAccount: "Zaten hesabınız var mı?",
             dontHaveAccount: "Hesabınız yok mu?",
-            logoutBtn: "Çıkış Yapıldı."
+            logoutBtn: "Çıkış Yapıldı.",
+            orderReceived: "Sipariş Alındı",
+            backToHome: "ANA SAYFAYA DÖN",
+            payment: "Ödeme",
+            cardNumber: "Kart Numarası",
+            expiryDate: "Son Kullanma Tarihi",
+            back: "Geri",
+            next: "İleri",
+            pleaseFillPaymentInfo: "Lütfen Ödeme Bilgilerini Doldurun",
+            deliveryAddress: "Teslimat Adresi",
+            fullName: "Ad Soyad",
+            address: "Adres",
+            phone: "Telefon",
+            confirmation: "Onay"
         }
     }
 };

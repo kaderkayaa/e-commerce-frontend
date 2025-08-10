@@ -35,10 +35,16 @@ const Home = () => {
 
         // fiyat icin filtre
         if (minPrice !== "") {
-            filtered = filtered.filter(p => p.price >= parseFloat(minPrice));
+            filtered = filtered.filter(p => {
+                const price = i18n.language === "tr" ? p.price * 40 : p.price;
+                return price >= parseFloat(minPrice);
+            })
         }
         if (maxPrice !== "") {
-            filtered = filtered.filter(p => p.price <= parseFloat(maxPrice));
+            filtered = filtered.filter(p => {
+                const price = i18n.language === "tr" ? p.price * 40 : p.price;
+                return price <= parseFloat(maxPrice);
+            });
         }
         setFilteredProducts(filtered);
     }, [searchText, minPrice, maxPrice, product]);
@@ -133,8 +139,7 @@ const Home = () => {
                             </div>
                         ))
                     ) : (
-                        // <p>No product suitable for the filter was found.</p>
-                        <p>{t("noProductFound")}</p>
+                        <p className="filter-not-found">{t("noProductFound")}</p>
                     )}
                 </div>
             </div>

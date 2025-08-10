@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { FavoriteContext } from "../Context/FavoriteContext";
-import { BasketContext } from "../Context/BasketContext";
+import { FavoriteContext } from "../../Context/FavoriteContext";
+import { BasketContext } from "../../Context/BasketContext";
 import { FaHeart } from "react-icons/fa";
 import "./favorites.css";
 import { toast } from 'react-toastify';
