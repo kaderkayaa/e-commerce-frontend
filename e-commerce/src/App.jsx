@@ -27,8 +27,8 @@ function App() {
   return (
 
     <ProductProvider>
-      <BasketProvider>
-        <FavoriteProvider>
+      <BasketProvider currentUser={currentUser}>
+        <FavoriteProvider currentUser={currentUser}>
           <div className="app-wrapper" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
             <Header currentUser={currentUser} setCurrentUser={setCurrentUser} />
             <div className="app-content" style={{ flex: 1 }}>

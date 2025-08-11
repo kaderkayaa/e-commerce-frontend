@@ -2,17 +2,29 @@ import React, { createContext, useState, useEffect } from "react";
 
 export const FavoriteContext = createContext();
 
-export const FavoriteProvider = ({ children }) => {
-    //localden favorileri aldigim kisim
-    const [favorites, setFavorites] = useState(() => {
-        const saved = localStorage.getItem("favorites");
-        return saved ? JSON.parse(saved) : [];
-    });
+export const FavoriteProvider = ({ children, currentUser }) => {
+
+    const storageKey = currentUser ? `favorites_${currentUser.email}` : null;
+    const [favorites, setFavorites] = useState([]);
+
+    //kullaniciya ait fav kismi
+    useEffect(() => {
+        if (storageKey) {
+            const saved = localStorage.getItem(storageKey);
+            setFavorites(saved ? JSON.parse(saved) : []);
+        }
+        else {
+            setFavorites([]);
+        }
+    }, [storageKey]);
+
 
     // favorites değistiginde locali guncelle
     useEffect(() => {
-        localStorage.setItem("favorites", JSON.stringify(favorites));
-    }, [favorites]);
+        if (storageKey) {
+            localStorage.setItem(storageKey, JSON.stringify(favorites));
+        }
+    }, [favorites, storageKey]);
 
     const toggleFavorite = (product) => {
         setFavorites((prev) => {

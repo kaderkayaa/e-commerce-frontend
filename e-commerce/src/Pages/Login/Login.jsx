@@ -16,24 +16,33 @@ function Login({ setCurrentUser }) {
 
     const handleRegister = (e) => {
         e.preventDefault();
+        const users = JSON.parse(localStorage.getItem("users") || "{}");
         const userData = { name, email, password };
-        localStorage.setItem('user', JSON.stringify(userData));
+        users[email] = userData;
+        localStorage.setItem("users", JSON.stringify(users));
+        localStorage.setItem("currentUser", JSON.stringify(userData));
+        setCurrentUser(userData);
         toast.success(t("registrationSuccess"));
-        setIsRegistering(false);
         setName('');
+        setEmail('');
         setPassword('');
     };
 
     const handleLogin = (e) => {
         e.preventDefault();
-        const storedUser = JSON.parse(localStorage.getItem('user'));
-        if (!storedUser) return toast.error(t("userNotFound"));
 
-        if (storedUser.email === email && storedUser.password === password) {
+        const users = JSON.parse(localStorage.getItem("users") || "{}");
+        const storedUser = users[email];
+
+        if (!storedUser) {
+            return toast.error(t("userNotFound") || "Kullanıcı bulunamadı.");
+        }
+
+        if (storedUser.password === password) {
             localStorage.setItem("currentUser", JSON.stringify(storedUser));
             setCurrentUser(storedUser);
-            navigate('/');
             toast.success(t("loginSuccess"));
+            navigate("/");
         } else {
             toast.error(t("emailOrPasswordIncorrect"));
         }

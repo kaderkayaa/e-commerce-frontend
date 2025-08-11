@@ -194,7 +194,11 @@ const Basket = () => {
                         <FaCheckCircle className="check-icon" />
                         <div className="confirmation-text">
                             <h2>{t("orderReceived")}</h2>
-                            <button className="checkout-btn" onClick={() => navigate("/")}>
+                            <button className="checkout-btn" onClick={() => {
+                                clearBasket();
+                                localStorage.removeItem("selectedItems");
+                                navigate("/");
+                            }}>
                                 {t("backToHome")}
                             </button>
                         </div>

@@ -2,17 +2,30 @@ import React, { createContext, useState, useEffect } from "react";
 
 export const BasketContext = createContext();
 
-export const BasketProvider = ({ children }) => {
+export const BasketProvider = ({ children, currentUser }) => {
+    const storageKey = currentUser ? `basket_${currentUser.email}` : null;
+    const [basket, setBasket] = useState([]);
 
-    const [basket, setBasket] = useState(() => {
-        const saved = localStorage.getItem("basket");
-        return saved ? JSON.parse(saved) : [];
-    });
+    //kullaniciya ait sepet 
+    useEffect(() => {
+        if (storageKey) {
+            const saved = localStorage.getItem(storageKey);
+            setBasket(saved ? JSON.parse(saved) : []);
+        }
+        else {
+            setBasket([]);
+        }
+    }, [storageKey]);
+
+
+
 
     //yenilenince secilenler silinmesin diye locals kismi 
     useEffect(() => {
-        localStorage.setItem("basket", JSON.stringify(basket));
-    }, [basket]);
+        if (storageKey) {
+            localStorage.setItem(storageKey, JSON.stringify(basket));
+        }
+    }, [basket, storageKey]);
 
 
 
